@@ -1,44 +1,431 @@
 /* Blackjack: estilos. Un color principal (tinta y papel) y un color de acento elegido por el jugador. */
-:root{--fondo:#f5f5f4;--tinta:#141414;--apagado:#6b6b6b;--linea:#d8d6d2;--papel:#fff;--acento:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-tema="claro"]){--fondo:#0e0e0f;--tinta:#f3f3f2;--apagado:#9a9a9a;--linea:#3a3a3d;--papel:#1b1b1d}}
-:root[data-tema="oscuro"]{--fondo:#0e0e0f;--tinta:#f3f3f2;--apagado:#9a9a9a;--linea:#3a3a3d;--papel:#1b1b1d}
-*{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-#aplicacion{max-width:480px;margin:0 auto;padding:0 16px 12px;min-height:100vh}
-h2{margin:6px 0;font-size:26px}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--fondo);display:flex;align-items:center;gap:10px;padding:12px 0}
-h1{margin:0;font-size:20px;flex:1}
-.jugador{display:flex;align-items:center;gap:6px;font-weight:600}.jugador i{width:14px;height:14px;border-radius:50%;background:var(--acento)}
-.icono{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.boton-tema{background:none;border:2px solid var(--linea);color:var(--tinta);border-radius:12px;width:42px;height:42px;display:grid;place-items:center;cursor:pointer}
-.boton{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;width:100%;border-radius:14px;border:2px solid var(--tinta);background:transparent;color:var(--tinta);font:inherit;font-weight:600;padding:0 16px;cursor:pointer}
-.boton.primario{background:var(--tinta);color:var(--fondo)}.boton.acento{background:var(--acento);border-color:var(--acento);color:#fff}
-.boton:disabled,.boton-ficha:disabled{opacity:.35;cursor:default}
-button:focus-visible,input:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
-.pila{display:grid;gap:12px}.cuadricula{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ancho{grid-column:1/-1}
-.panel{border:2px solid var(--linea);background:var(--papel);border-radius:16px;padding:12px 14px}.panel.activo{border-color:var(--acento)}
-.fila-cabecera{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--apagado);font-size:15px}.fila-cabecera b{color:var(--tinta);font-size:20px}
-.mano-cartas{display:flex;padding:8px 0 2px;min-height:100px}.carta{width:60px;height:auto;flex:none}.carta+.carta{margin-left:-22px}.grande .carta{width:76px}.grande .carta+.carta{margin-left:-28px}
-.fichas{display:flex;gap:8px;justify-content:center}.boton-ficha{background:none;border:0;padding:0;width:66px;cursor:pointer}.ficha{width:100%;display:block}
-.cifra{font-size:46px;font-weight:800;line-height:1.1}.tenue{color:var(--apagado);font-size:15px;margin:0}
-.mensaje{text-align:center;font-weight:700;min-height:24px;margin:0}
-.barra{position:sticky;bottom:0;background:var(--fondo);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));margin-top:12px}
-input[type=text]{width:100%;min-height:52px;border-radius:14px;border:2px solid var(--linea);background:var(--papel);color:var(--tinta);font:inherit;padding:0 14px}
-.muestras{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.muestras button,.muestras input{width:42px;height:42px;border-radius:50%;border:3px solid var(--fondo);box-shadow:0 0 0 2px var(--linea);padding:0;cursor:pointer;background:none}.muestras button.activo{box-shadow:0 0 0 3px var(--tinta)}
-.fila{display:flex;gap:10px;align-items:center}.fila input{width:22px;height:22px;accent-color:var(--acento)}
-.franja{background:var(--acento);color:#fff;border-radius:16px;padding:20px;text-align:center}
-.portada{display:block;width:100%;height:auto;max-height:200px}.carta-a{transform:rotate(-13deg);transform-origin:150px 178px}.carta-b{transform:rotate(13deg);transform-origin:150px 178px}
-.distintivos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.distintivos span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:14px;color:var(--apagado);border:2px solid var(--linea);border-radius:14px;padding:10px 4px;text-align:center}
-.lema{font-size:32px;font-weight:800;margin:0;line-height:1.1}
-.ayuda .fila{align-items:flex-start;margin-top:8px}.ayuda p{margin:0;font-size:16px;color:var(--apagado)}
-@media(prefers-reduced-motion:no-preference){
-body,.panel,.boton,.boton-tema{transition:background-color .25s,color .25s,border-color .25s,transform .12s,opacity .2s}
-.boton:active,.boton-ficha:active,.boton-tema:active{transform:scale(.96)}
-.entrada{animation:aparecer .28s ease-out}
-.carta.nueva{animation:caer .3s ease-out both}.carta.nueva+.carta.nueva{animation-delay:.09s}
-.carta-a{animation:abrirA .7s .1s ease-out both}.carta-b{animation:abrirB .7s .1s ease-out both}
-@keyframes aparecer{from{opacity:0;transform:translateY(10px)}}
-@keyframes caer{from{opacity:0;transform:translateY(-16px) scale(.92)}}
-@keyframes abrirA{from{transform:rotate(0)}}@keyframes abrirB{from{transform:rotate(0)}}
+:root {
+    --fondo: #f5f5f4;
+    --tinta: #141414;
+    --apagado: #6b6b6b;
+    --linea: #d8d6d2;
+    --papel: #fff;
+    --acento: #2563eb;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px)
+}
+
+@media(prefers-color-scheme:dark) {
+    :root:not([data-tema="claro"]) {
+        --fondo: #0e0e0f;
+        --tinta: #f3f3f2;
+        --apagado: #9a9a9a;
+        --linea: #3a3a3d;
+        --papel: #1b1b1d
+    }
+}
+
+:root[data-tema="oscuro"] {
+    --fondo: #0e0e0f;
+    --tinta: #f3f3f2;
+    --apagado: #9a9a9a;
+    --linea: #3a3a3d;
+    --papel: #1b1b1d
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px)
+}
+
+body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--tinta);
+    font: 17px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+}
+
+#aplicacion {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px 12px;
+    min-height: 100vh
+}
+
+h2 {
+    margin: 6px 0;
+    font-size: 26px
+}
+
+header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 2;
+    background: var(--fondo);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+    flex: 1
+}
+
+.jugador {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600
+}
+
+.jugador i {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--acento)
+}
+
+.icono {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none
+}
+
+.boton-tema {
+    background: none;
+    border: 2px solid var(--linea);
+    color: var(--tinta);
+    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    cursor: pointer
+}
+
+.boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    width: 100%;
+    border-radius: 14px;
+    border: 2px solid var(--tinta);
+    background: transparent;
+    color: var(--tinta);
+    font: inherit;
+    font-weight: 600;
+    padding: 0 16px;
+    cursor: pointer
+}
+
+.boton.primario {
+    background: var(--tinta);
+    color: var(--fondo)
+}
+
+.boton.acento {
+    background: var(--acento);
+    border-color: var(--acento);
+    color: #fff
+}
+
+.boton:disabled,
+.boton-ficha:disabled {
+    opacity: .35;
+    cursor: default
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--acento);
+    outline-offset: 2px
+}
+
+.pila {
+    display: grid;
+    gap: 12px
+}
+
+.cuadricula {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+}
+
+.ancho {
+    grid-column: 1/-1
+}
+
+.panel {
+    border: 2px solid var(--linea);
+    background: var(--papel);
+    border-radius: 16px;
+    padding: 12px 14px
+}
+
+.panel.activo {
+    border-color: var(--acento)
+}
+
+.fila-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: var(--apagado);
+    font-size: 15px
+}
+
+.fila-cabecera b {
+    color: var(--tinta);
+    font-size: 20px
+}
+
+.mano-cartas {
+    display: flex;
+    padding: 8px 0 2px;
+    min-height: 100px
+}
+
+.carta {
+    width: 60px;
+    height: auto;
+    flex: none
+}
+
+.carta+.carta {
+    margin-left: -22px
+}
+
+.grande .carta {
+    width: 76px
+}
+
+.grande .carta+.carta {
+    margin-left: -28px
+}
+
+.fichas {
+    display: flex;
+    gap: 8px;
+    justify-content: center
+}
+
+.boton-ficha {
+    background: none;
+    border: 0;
+    padding: 0;
+    width: 66px;
+    cursor: pointer
+}
+
+.ficha {
+    width: 100%;
+    display: block
+}
+
+.cifra {
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.1
+}
+
+.tenue {
+    color: var(--apagado);
+    font-size: 15px;
+    margin: 0
+}
+
+.mensaje {
+    text-align: center;
+    font-weight: 700;
+    min-height: 24px;
+    margin: 0
+}
+
+.barra {
+    position: sticky;
+    bottom: 0;
+    background: var(--fondo);
+    padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
+    margin-top: 12px
+}
+
+input[type=text] {
+    width: 100%;
+    min-height: 52px;
+    border-radius: 14px;
+    border: 2px solid var(--linea);
+    background: var(--papel);
+    color: var(--tinta);
+    font: inherit;
+    padding: 0 14px
+}
+
+.muestras {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.muestras button,
+.muestras input {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 3px solid var(--fondo);
+    box-shadow: 0 0 0 2px var(--linea);
+    padding: 0;
+    cursor: pointer;
+    background: none
+}
+
+.muestras button.activo {
+    box-shadow: 0 0 0 3px var(--tinta)
+}
+
+.fila {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.fila input {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--acento)
+}
+
+.franja {
+    background: var(--acento);
+    color: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center
+}
+
+.portada {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 200px
+}
+
+.carta-a {
+    transform: rotate(-13deg);
+    transform-origin: 150px 178px
+}
+
+.carta-b {
+    transform: rotate(13deg);
+    transform-origin: 150px 178px
+}
+
+.distintivos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px
+}
+
+.distintivos span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--apagado);
+    border: 2px solid var(--linea);
+    border-radius: 14px;
+    padding: 10px 4px;
+    text-align: center
+}
+
+.lema {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1
+}
+
+.ayuda .fila {
+    align-items: flex-start;
+    margin-top: 8px
+}
+
+.ayuda p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--apagado)
+}
+
+@media(prefers-reduced-motion:no-preference) {
+
+    body,
+    .panel,
+    .boton,
+    .boton-tema {
+        transition: background-color .25s, color .25s, border-color .25s, transform .12s, opacity .2s
+    }
+
+    .boton:active,
+    .boton-ficha:active,
+    .boton-tema:active {
+        transform: scale(.96)
+    }
+
+    .entrada {
+        animation: aparecer .28s ease-out
+    }
+
+    .carta.nueva {
+        animation: caer .3s ease-out both
+    }
+
+    .carta.nueva+.carta.nueva {
+        animation-delay: .09s
+    }
+
+    .carta-a {
+        animation: abrirA .7s .1s ease-out both
+    }
+
+    .carta-b {
+        animation: abrirB .7s .1s ease-out both
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(10px)
+        }
+    }
+
+    @keyframes caer {
+        from {
+            opacity: 0;
+            transform: translateY(-16px) scale(.92)
+        }
+    }
+
+    @keyframes abrirA {
+        from {
+            transform: rotate(0)
+        }
+    }
+
+    @keyframes abrirB {
+        from {
+            transform: rotate(0)
+        }
+    }
 }

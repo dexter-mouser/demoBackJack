@@ -5,7 +5,7 @@ const almacen = {
     catch (error) { return porDefecto; }
   },
   guardar(clave, valor) {
-    try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (error) {}
+    try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (error) { }
   },
 };
 
